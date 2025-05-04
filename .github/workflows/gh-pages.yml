@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # main ブランチにプッシュがあったときにデプロイ
+      - main
 
 jobs:
   deploy:
@@ -11,15 +11,15 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: "20" # 使用している Node.js のバージョンに合わせてください
+          node-version: "20"
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
@@ -27,13 +27,13 @@ jobs:
             ${{ runner.os }}-node-modules-
 
       - name: Install dependencies
-        run: yarn install # yarn で依存関係をインストール
+        run: yarn install
 
       - name: Build Next.js
-        run: yarn build && yarn export # Next.js をビルドし、静的ファイルにエクスポート
+        run: yarn build && yarn export
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages # デプロイ先のブランチ
-          folder: out # 出力先のディレクトリ（next export により生成された out フォルダ）
+          branch: gh-pages
+          folder: out

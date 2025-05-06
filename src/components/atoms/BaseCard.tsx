@@ -3,7 +3,7 @@ import { VStack, Card, Image, CardBody } from "@chakra-ui/react";
 
 const BaseCard = () => {
   return (
-    <Card direction="row" overflow="hidden" variant="outline" w="320px">
+    <Card direction="row" overflow="hidden" variant="outline" w="340px">
       <Image
         objectFit="cover"
         maxW="180px"

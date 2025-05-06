@@ -1,12 +1,12 @@
 import { NextPage } from "next";
-import { Text } from "@chakra-ui/react";
+import Layout from "@/components/Layout";
+import MainHeader from "@/components/presentational/MainHeader";
 
 const Page: NextPage = () => {
   return (
-    <>
-      <Text>Wawawa Websiteへようこそ</Text>
-      <Text>ここはmainページです</Text>
-    </>
+    <Layout>
+      <MainHeader />
+    </Layout>
   );
 };
 

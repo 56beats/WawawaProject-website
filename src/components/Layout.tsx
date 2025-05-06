@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, VStack } from "@chakra-ui/react";
 import { ReactElement, ReactNode } from "react";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 const RootLayout = (props: Props): ReactElement => {
   return (
     <Flex justify="center" margin="120px 120px 0px 120px">
-      {props.children}
+      <VStack w="100%">{props.children}</VStack>
     </Flex>
   );
 };

@@ -1,44 +1,85 @@
-import { Box, Container, Stack, Heading, Text } from "@chakra-ui/react";
+import { Box, Container, Stack, Heading, Text, Grid, GridItem } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // スクロール方向を判定：下スクロール時は非表示、上スクロール時は表示
+      if (currentScrollY > lastScrollY) {
+        // 下にスクロール
+        setIsHeaderVisible(false);
+      } else {
+        // 上にスクロール
+        setIsHeaderVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   return (
     <Box bg="#0F172A" color="#E5E7EB" minH="100vh">
-      <Container maxW="container.md" py={{ base: 16, md: 24 }}>
+      {/* Header */}
+      <Box
+        as="header"
+        position="fixed"
+        top="0"
+        left="0"
+        right="0"
+        zIndex={999}
+        bg="#0F172A"
+        borderBottom="1px solid rgba(255,255,255,0.04)"
+        transform={isHeaderVisible ? "translateY(0)" : "translateY(-100%)"}
+        transition="transform 0.3s ease-in-out"
+      >
+        <Container maxW="container.md" py={4}>
+          <Grid templateColumns="repeat(4, 1fr)" textAlign="center">
+            <GridItem colSpan={2} textAlign={"left"}>
+              <Text fontSize="md">Games</Text>
+            </GridItem>
+            <GridItem colSpan={1}>
+              <Text fontSize="md">Music</Text>
+            </GridItem>
+            <GridItem colSpan={1}>
+              <Text fontSize="md">Visual</Text>
+            </GridItem>
+          </Grid>
+        </Container>
+      </Box>
+
+      <Container maxW="container.md" py={{ base: 16, md: 24 }} pt={{ base: "88px", md: "96px" }}>
         <Stack spacing={24}>
-
           {/* Hero */}
-          <Stack spacing={4} textAlign="center">
-            <Heading
-              fontFamily="'Press Start 2P', cursive"
-              fontSize={{ base: "24px", md: "36px" }}
-            >
-              WAWAWA PROJECT OFFICIAL
-            </Heading>
+          <Grid templateColumns="repeat(2, 1fr)" textAlign="left">
+            <GridItem mb={4}>
+              <Heading
+                fontFamily="'Press Start 2P', cursive"
+                fontSize={{ base: "24px", md: "36px" }}
+              >
+                WAWAWA PROJECT OFFICIAL
+              </Heading>
+            </GridItem>
+            <GridItem mb={4}>
+              <Text>
+                wawawa-project は、個人制作を中心に活動している
+                同人サークルです。
+              </Text>
 
-            <Text fontSize="md">
-              個人制作・同人活動を中心に
-              ゲームや音楽作品を制作しているサークルです
-            </Text>
+              <Text>
+                ゲームや音楽など、ジャンルにとらわれず
+                実験的な作品制作を行っています。
+              </Text>
+            </GridItem>
+          </Grid>
 
-            <Text fontSize="sm" opacity={0.7}>
-              Games / Music / Visual
-            </Text>
-          </Stack>
-
-          {/* Concept */}
-          <Stack spacing={4}>
-            <Heading fontSize="xl">Concept</Heading>
-
-            <Text>
-              wawawa-project は、個人制作を中心に活動している
-              同人サークルです。
-            </Text>
-
-            <Text>
-              ゲームや音楽など、ジャンルにとらわれず
-              実験的な作品制作を行っています。
-            </Text>
-          </Stack>
           {/* Works */}
           <Stack spacing={8}>
             <Heading fontSize="xl">Contents</Heading>

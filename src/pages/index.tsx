@@ -26,7 +26,7 @@ export default function Home() {
   }, [lastScrollY]);
 
   return (
-    <Box bg="#0F172A" color="#E5E7EB" minH="100vh">
+    <Box bg="#0F172A" color="#E5E7EB" minH="100%">
       {/* Header */}
       <Box
         as="header"
@@ -40,9 +40,9 @@ export default function Home() {
         transform={isHeaderVisible ? "translateY(0)" : "translateY(-100%)"}
         transition="transform 0.3s ease-in-out"
       >
-        <Container maxW="container.md" py={4}>
-          <Grid templateColumns="repeat(4, 1fr)" textAlign="center">
-            <GridItem colSpan={2} textAlign={"left"}>
+        <Container maxW="100%" py={4} ml="auto" mr={{base : 0, md: 0}} width={{ base: "100%", md: "80%" }}>
+          <Grid templateColumns="repeat(5, 1fr)" textAlign="left">
+            <GridItem colSpan={2}>
               <Text fontSize="md">Games</Text>
             </GridItem>
             <GridItem colSpan={1}>
@@ -55,19 +55,19 @@ export default function Home() {
         </Container>
       </Box>
 
-      <Container maxW="container.md" py={{ base: 16, md: 24 }} pt={{ base: "88px", md: "96px" }}>
+      <Container maxW="100%" pt={{ base: "88px", md: "96px" }} ml="auto" mr={{base : 0, md: 0}} width={{ base: "100%", md: "80%" }}>
         <Stack spacing={24}>
           {/* Hero */}
-          <Grid templateColumns="repeat(2, 1fr)" textAlign="left">
-            <GridItem mb={4}>
+          <Grid templateColumns="repeat(5, 1fr)" textAlign="left" minHeight="50vh" alignItems="center">
+            <GridItem colSpan={2} mb={4}>
               <Heading
                 fontFamily="'Press Start 2P', cursive"
                 fontSize={{ base: "24px", md: "36px" }}
               >
                 WAWAWA PROJECT OFFICIAL
-              </Heading>
+              </Heading>  
             </GridItem>
-            <GridItem mb={4}>
+            <GridItem colSpan={3}>
               <Text>
                 wawawa-project は、個人制作を中心に活動している
                 同人サークルです。
@@ -90,6 +90,7 @@ export default function Home() {
                 border="1px solid"
                 borderColor="whiteAlpha.300"
                 borderRadius="md"
+                backgroundColor="#1C2541"
                 p={6}
                 _hover={{ transform: "translateY(-2px)", transition: "0.2s" }}
               >
